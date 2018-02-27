@@ -7,30 +7,29 @@ class Deck {
 	private static final int MAX_CARDS_PER_DECK = (MAX_PACKS * NUM_CARDS_PER_PACK);
 
 	private static Card[] MasterPack;
+	private static boolean Init;
 
 	private Card[] cards;
 	private int topCard;
 	private int numCards;
 	private int numPacks;
 
-	public boolean init(int numPacks) {
-		if (numPacks > MAX_PACKS || numPacks <= 0) {
-			return false;
-		}
+	// Default Constructor
+	public Deck() {
+		{
+			numPacks = 1;
 
-		numCards = numPacks * NUM_CARDS_PER_PACK;
-
-		cards = new Card[numCards];
-
-		// for loop to fill numPacks
-		for (int s = 0; s < numPacks; s++) {
-			// for loop to fill numCards
-			for (int g = 0; g < numCards; g++) {
-				// transfer values from MasterPack array to cards array
-				MasterPack[g] = cards[g + (NUM_CARDS_PER_PACK * s)];
+			if (!Init) {
+				allocateMasterPack();
 			}
 		}
-		return true;
+	}
+
+	// numPacks overloader
+	public Deck(int numPacks) {
+		if (Init == false) {
+			allocateMasterPack();
+		}
 	}
 
 	// numCards accessor
@@ -112,25 +111,8 @@ class Deck {
 			MasterPack[cc + ccs++ + (i * ccf)] = new Card('Q', cardSuits[i]);
 			MasterPack[cc + ccs++ + (i * ccf)] = new Card('K', cardSuits[i]);
 			MasterPack[cc + ccs++ + (i * ccf)] = new Card('A', cardSuits[i]);
-
+			
+			Init = true;
 		}
 	}
-
-	// Default Constructor
-	public Deck() {
-
-		numPacks = 1;
-
-		if (!init(numPacks)) {
-			allocateMasterPack();
-		}
-	}
-
-	// Constructor Overloader
-	public Deck(int numPacks) {
-		if (!init(numPacks)) {
-			allocateMasterPack();
-		}
-	}
-
 }

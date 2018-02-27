@@ -32,6 +32,7 @@ public class GUICard {
 				cardImageLocationString += turnIntIntoCardValueChar(value);
 				cardImageLocationString += turnIntIntoCardSuitChar(suit);
 				cardImageLocationString += ".gif";
+				iconCards[value][suit] = new ImageIcon(cardImageLocationString);
 			}
 			// sets card location for back of card
 			cardImageLocationString = "images/BK.gif";
